@@ -1,15 +1,17 @@
-import pandas as pd
+from HoLee import HoLee
 
 
 class Asset:
-    initial_price = 100
 
     def __init__(self, mu, sigma):
+        self.price_history = None
         self.mu = mu
         self.sigma = sigma
-        self.price = pd.DataFrame(data=[[0, self.initial_price],
-                                        [1, self.initial_price * (1+mu)]],
-                                  columns=['t', 'price'])
+        self.simulate_price()
+
+    def simulate_price(self):
+        model = HoLee(self.mu, self.sigma)
+        self.price_history = model.simulate_price()
 
     def show_price(self):
-        print(self.price.to_string(index=False))
+        print(self.price_history.to_string(index=False))
