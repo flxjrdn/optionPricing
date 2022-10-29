@@ -1,16 +1,15 @@
-import pandas as pd
+import numpy as np
 from ShortRateModel import ShortRateModel
 
 
 class HoLee(ShortRateModel):
     def __init__(self, mu, sigma):
-        self.initial_price = 100
+        super().__init__()
         self.mu = mu
         self.sigma = sigma
-        self.simulate_price()
 
-    def simulate_price(self):
-        self.price = pd.DataFrame(data=[[0, self.initial_price],
-                                        [1, self.initial_price * (1 + self.mu)]],
-                                  columns=['t', 'price'])
+    # noinspection PyPep8Naming
+    def simulate_price(self, time_horizon):
+        dW = self.bm.get_dW(time_horizon * self.timesteps_per_unit_time)
+        self.price = np.zeros(len(dW))
         return self.price
