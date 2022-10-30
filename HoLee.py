@@ -11,5 +11,8 @@ class HoLee(ShortRateModel):
     # noinspection PyPep8Naming
     def simulate_price(self, time_horizon):
         dW = self.bm.get_dW(time_horizon * self.timesteps_per_unit_time)
-        self.price = np.zeros(len(dW))
+        self.price = np.zeros(len(dW) + 1)
+        self.price[0] = self.initial_price
+        for i, dWt in enumerate(dW):
+            self.price[i+1] = self.price[i] + self.mu * self.dt + self.sigma * dWt
         return self.price
