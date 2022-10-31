@@ -1,5 +1,6 @@
 from Asset import Asset
 from Plotter import Plotter
+from EuropeanCallOption import EuropeanCallOption
 
 
 if __name__ == '__main__':
@@ -9,4 +10,9 @@ if __name__ == '__main__':
     asset.simulate_ho_lee(time_horizon=5)
 
     plotter = Plotter(asset)
-    plotter.plot()
+    # plotter.plot()
+
+    call = EuropeanCallOption(strike=100)
+
+    print(asset.price_history[-1])
+    print(call.payoff(asset.price_history))
