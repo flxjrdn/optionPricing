@@ -1,7 +1,8 @@
 from BrownianMotion import BrownianMotion
+from abc import ABC, abstractmethod
 
 
-class ShortRateModel:
+class ShortRateModel(ABC):
     def __init__(self):
         self.timesteps_per_unit_time = 1000
         self.dt = 1.0 / self.timesteps_per_unit_time
@@ -10,3 +11,7 @@ class ShortRateModel:
                                  scale=1.0)
         self.initial_price = 100
         self.price = None
+
+    @abstractmethod
+    def sample_path(self, time_horizon):
+        pass
