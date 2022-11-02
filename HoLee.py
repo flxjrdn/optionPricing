@@ -1,5 +1,6 @@
 import numpy as np
 from ShortRateModel import ShortRateModel
+from SamplePath import SamplePath
 
 
 class HoLee(ShortRateModel):
@@ -9,9 +10,11 @@ class HoLee(ShortRateModel):
 
     # noinspection PyPep8Naming
     def sample_path(self, time_horizon):
-        dW = self.bm.get_dW(time_horizon * self.timesteps_per_unit_time)
-        self.price = np.zeros(len(dW) + 1)
-        self.price[0] = self.initial_price
+        timesteps = time_horizon * self.timesteps_per_unit_time
+        dW = self.bm.get_dW(timesteps)
+        price = np.zeros(timesteps + 1)
+        price[0] = self.asset.initial_price
         for i, dWt in enumerate(dW):
-            self.price[i+1] = self.price[i] + self.asset.mu * self.dt + self.asset.sigma * dWt
-        return self.price
+            price[i+1] = price[i] + self.asset.mu * self.dt + self.asset.sigma * dWt
+        sample_path = SamplePath(dt=self.dt, price=price)
+        return sample_path

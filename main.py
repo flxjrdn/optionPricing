@@ -11,7 +11,7 @@ if __name__ == '__main__':
     asset = Asset(mu=0.1, sigma=1)
     # asset.simulate_ho_lee(time_horizon=5)
 
-    ho_lee = HoLee()
+    ho_lee = HoLee(asset)
 
     plotter = Plotter(asset)
     # plotter.plot()

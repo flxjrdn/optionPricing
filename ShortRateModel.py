@@ -9,8 +9,6 @@ class ShortRateModel(ABC):
         self.bm = BrownianMotion(dt=self.dt,
                                  loc=0.0,
                                  scale=1.0)
-        self.initial_price = 100
-        self.price = None
 
     @abstractmethod
     def sample_path(self, time_horizon):
