@@ -4,4 +4,4 @@ class EuropeanCallOption:
         self.time_horizon = time_horizon
 
     def payoff(self, sample_path):
-        return max(sample_path[-1] - self.strike, 0)
+        return max(sample_path.price[-1] - self.strike, 0)
