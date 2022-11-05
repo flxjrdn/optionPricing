@@ -2,9 +2,9 @@ import numpy as np
 
 
 class BrownianMotion:
-    def __init__(self, dt, loc=0.0, scale=1.0):
-        self.loc = loc
-        self.scale = scale
+    def __init__(self, dt):
+        self.loc = 0.0
+        self.scale = 1.0
         self.dt = dt
 
     # noinspection PyPep8Naming
